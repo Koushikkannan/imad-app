@@ -8,17 +8,17 @@ app.use(morgan('combined'));
 var articles={
 Articleone:{
     title:'Artivle-one|kannan',
-    heading:'Article-one',
+    heading:'Article-2',
     date:'1 Aug,2017',
     content:` <h3>nothing to show sample</h3> `
     
 },
 Articletwo:{ title:'Artivle-Two|kannan',
-    heading:'Article-two',
+    heading:'Article-2',
     date:'2 Aug,2017',
     content:` <h3>nothing to show sample</h3> `},
 Articlethree:{ title:'Artivle-Three|kannan',
-    heading:'Article-three',
+    heading:'Article-3',
     date:'3 Aug,2017',
     content:` <h3>nothing to show sample</h3> `}
 };
@@ -40,7 +40,7 @@ var htmlTemplate=`<html>
         <div>
             <a href="/">Home</a>
         </div>
-        <h3>$date</h3>
+        <h3>${date}</h3>
         <h3>${heading}</h3>
        <h3>${content}</h3>
         </div>
