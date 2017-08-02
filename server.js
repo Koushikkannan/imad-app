@@ -9,7 +9,7 @@ var articles={
 Articleone:{
     title:'Artivle-one|kannan',
     heading:'Article-one',
-    date:'2 Aug,2017',
+    date:'1 Aug,2017',
     content:` <h3>nothing to show sample</h3> `
     
 },
@@ -19,7 +19,7 @@ Articletwo:{ title:'Artivle-Two|kannan',
     content:` <h3>nothing to show sample</h3> `},
 Articlethree:{ title:'Artivle-Three|kannan',
     heading:'Article-three',
-    date:'2 Aug,2017',
+    date:'3 Aug,2017',
     content:` <h3>nothing to show sample</h3> `}
 };
 
