@@ -1,68 +1,116 @@
-console.log('Loaded!');
-//change the text of main-text div
-var element=document.getElementById('main-text');
-element.innerHTML="New value";
+var express = require('express');
+var morgan = require('morgan');
+var path = require('path');
 
-var marginLeft=0;
+var app = express();
+app.use(morgan('combined'));
 
-function moveRight(){
-    marginLeft=marginLeft+1;
-    img.style.marginLeft=marginLeft+'px';
+var articles={
+Articleone:{
+    title:'Artivle-one|kannan',
+    heading:'Article-1',
+    date:'1 Aug,2017',
+    content:` <h3>nothing to show sample</h3> `
+    
+},
+Articletwo:{ title:'Artivle-Two|kannan',
+    heading:'Article-2',
+    date:'2 Aug,2017',
+    content:` <h3>nothing to show sample</h3> `},
+Articlethree:{ title:'Artivle-Three|kannan',
+    heading:'Article-3',
+    date:'3 Aug,2017',
+    content:` <h3>nothing to show sample</h3> `}
+};
+
+
+function createTemplate(data){
+    var title=data.title;
+    var heading=data.heading;
+    var content=data.content;
+    var date=data.date;
+var htmlTemplate=`<html>
+    <head>
+        <title>${title}</title>
+        <meta name="viewport" content="width-device-width, initial-scale-1"/>
+        <link href="/ui/style.css" rel="stylesheet" />
+   </head>
+    <body>
+        <div class="container">
+        <div>
+            <a href="/">Home</a>
+        </div>
+        <h3>${date}</h3>
+        <h3>${heading}</h3>
+       <h3>${content}</h3>
+        </div>
+    </body>
+</html> `;
+return htmlTemplate;
+
 }
 
-//move the image
-var img=document.getElementById('madi');
-img.onclick=function(){
-   // img.style.marginLeft='100px';
-    var interval=setInterval(moveRight,50);
-};
+var counter=0;
 
-var button=document.getElementById('counter');
-//var counter=0;
+app.get('/counter', function (req, res) {
+    counter=counter+1;
+  res.send(counter.toString());
+});
 
-button.onclick=function(){
-    //counter=counter+1;
-    //var span=document.getElementById('count');
-    //span.innerHTML=counter.toString();
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'index.html'));
+});
 
-var request=new XMLHttpRequest();
-request.onreadystatechange=function(){
-    if(request.readystate===XMLHttpRequest.Done)
-    {
-    if(request.status===200)
-    {
-        var counter=request.responseText;
-        var span=document.getElementById('count');
-    span.innerHTML=counter.toString(); 
-    }
-    }
-    //not done yet
-};
-//make the request and once the request is made then the request state changes to request is done and the code will be executed
-request.open('GET','http://kannand2013.imad.hasura-app.io/counter',true);
-request.send(null);
-};
-//create a request object
-
-var nameInput=document.getElementById('name');
-var name=nameInput.value;
-var submit=document.getElemntById('submit_btn');
-submit.onclick=function()
-{
-    //make a request to the server and send the name
-    //capture a list of names and render it as a list
-    var names=['name1','name2','name3','name4'];
-    var list='';
-    for(var i=0;i<names.length;i++)
-    {
-        list='<li>'+names[i]+'</li>';
-    }
-var ul=document.getElementById('namelist');
-ul.innerHTML=list;
-    
-};
+app.get('/ui/style.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'style.css'));
+});
 
 
+var names=[];
+
+//app.get('/submit-name/:name', function (req, res) {
+app.get('/submit-name', function (req, res) {// /submit-name?name=xxxxxx
+  //var name=req.params.name;
+  var name=req.query.name;
+  
+  //get the name from the request
+  
+  names.push(name);
+  //JSON:Java Script Object Notation
+  res.send(JSON.stringify(names));//1000
+});
+
+
+app.get('/:articleName', function (req, res) {
+    //articleName=article-one   
+    //artices[articleName]={} content object for article-one
+    var articleName=req.params.articleName;
+ res.send(createTemplate(articles[articleName]));
+});
+
+//app.get('/article-two', function (req, res) {
+  //res.send('article-two');
+//});
+
+//app.get('/article-three', function (req, res) {
+ // res.send('article-three');
+//});
+
+app.get('/ui/madi.png', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
+});
+
+app.get('/ui/main.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'main.js'));
+});
 
 
 
+
+// Do not change port, otherwise your app won't run on IMAD servers
+// Use 8080 only for local development if you already have apache running on 80
+
+var port = 80;
+app.listen(port, function () {
+  console.log(`IMAD course app listening on port ${port}!`);
+});
