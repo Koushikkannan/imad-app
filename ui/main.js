@@ -40,15 +40,26 @@ var button=document.getElementById('counter');
  request.send(null);
  };
  //create a request object
- 
+ //submit name
  var nameInput=document.getElementById('name');
  var name=nameInput.value;
  var submit=document.getElemntById('submit_btn');
- submit.onclick=function()
- {
+ submit.onclick=function(){
+ 
+     
+     //create request object
+     var request=new XMLHttpRequest();
+     
+      request.onreadystatechange=function(){
+     if(request.readystate===XMLHttpRequest.Done)
+     {
+     if(request.status===200)
+     {
+     
      //make a request to the server and send the name
      //capture a list of names and render it as a list
-     var names=['name1','name2','name3','name4'];
+     var names=request.responseText;
+     names=JSON.parse(names);
      var list='';
      for(var i=0;i<names.length;i++)
      {
@@ -56,5 +67,19 @@ var button=document.getElementById('counter');
      }
  var ul=document.getElementById('namelist');
  ul.innerHTML=list;
-     
+     }
+     }
  };
+ request.open('GET','http://kannand2013.imad.hasura-app.io/submit-name?name='+name,true);
+ request.send(null);
+ };
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
