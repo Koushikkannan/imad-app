@@ -41,8 +41,7 @@ var button=document.getElementById('counter');
  };
  //create a request object
  //submit name
- var nameInput=document.getElementById('name');
- var name=nameInput.value;
+
  var submit=document.getElemntById('submit_btn');
  submit.onclick=function(){
  
@@ -70,6 +69,8 @@ var button=document.getElementById('counter');
      }
      }
  };
+ var nameInput=document.getElementById('name');
+ var name=nameInput.value;
  request.open('GET','http://kannand2013.imad.hasura-app.io/submit-name?name='+name,true);
  request.send(null);
  };
