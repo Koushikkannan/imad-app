@@ -31,25 +31,15 @@ request.onreadystatechange=function(){
     {
     if(request.status===200)
     {
-       // var counter=request.responseText;
-        //var span=document.getElementById('count');
-   // span.innerHTML=counter.toString(); 
-   //capture a list of names and render it as a list
-    var names=request.responseText;
-    names=JSON.parse(names);
-    var list='';
-    for(var i=0;i<names.length;i++)
-    {
-        list='<li>'+names[i]+'</li>';
-    }
-var ul=document.getElementById('namelist');
-ul.innerHTML=list;
+        var counter=request.responseText;
+        var span=document.getElementById('count');
+    span.innerHTML=counter.toString(); 
     }
     }
     //not done yet
 };
 //make the request and once the request is made then the request state changes to request is done and the code will be executed
-request.open('GET','http://kannand2013.imad.hasura-app.io/submit-name?name=' + name,true);
+request.open('GET','http://kannand2013.imad.hasura-app.io/counter',true);
 request.send(null);
 };
 //create a request object
