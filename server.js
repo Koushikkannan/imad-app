@@ -112,6 +112,7 @@ app.get('/hash:input',function(req,res)
 
 app.post('/create-user',function(req,res){ 
     //username,password
+    //{"username":"kannan","password":"password"}
     //JSON
     
     
