@@ -76,7 +76,7 @@ var submit=document.getElemntById('submit_btn');
      }else if (request.status===500){
          alert('something went wrong on the server');
      }
- };
+ }
 // var nameInput=document.getElementById('name');
 //var name=nameInput.value;
 var username=document.getElementById('username').value;
@@ -88,8 +88,7 @@ console.log(password);
   request.setRequestHeader('Content-Type','application/json');
  request.send(JSON.stringify({username:username,password:password}));
  };
- 
- 
+ };
  
  
  
