@@ -1,10 +1,11 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
-var pool=require('pg').pool;
+var Pool = require('pg').Pool;
 var crypto=require('crypto');
 var bodyParser=require('body-parser');
 var session=require('express-session');
+
 
 var config={
     
@@ -80,7 +81,7 @@ app.get('/counter', function (req, res) {
 });
 
 
-var pool=new Pool(config);
+var Pool=new Pool(config);
 app.get('/test-db', function (req, res) {
   //make a select request
   //returns a respone with the results
